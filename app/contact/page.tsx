@@ -298,8 +298,8 @@ export default function ContactPage() {
                   />
                 </div>
 
-                <div>
-                  <p className="text-xs text-text-light/50 text-center mb-3">
+                <div className="!mt-2">
+                  <p className="text-xs text-text-light/50 text-center mb-5">
                     Protected by reCAPTCHA. Google{' '}
                     <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline">Privacy Policy</a>{' '}
                     and{' '}

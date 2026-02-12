@@ -367,15 +367,14 @@ export default function ProjectDetailClient() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: '-100px' }}
                         transition={{ delay: 0.1, duration: 0.8 }}
-                        className="grid grid-cols-2 gap-8"
-                        style={{ height: '700px' }}
+                        className="grid grid-cols-1 md:grid-cols-2 gap-8"
                       >
                         <button
                           onClick={() => handleImageClick(currentIndex1)}
-                          className="relative w-full h-full bg-bg-card overflow-hidden shadow-photo cursor-pointer group"
+                          className="relative w-full aspect-[2/3] bg-bg-card overflow-hidden shadow-photo cursor-pointer group"
                         >
                           <Image
-                            src={urlFor(image).width(700).height(700).fit('crop').auto('format').quality(90).url()}
+                            src={urlFor(image).width(700).height(1050).fit('crop').auto('format').quality(90).url()}
                             alt={image.alt || `${project.title} - Image ${i + 1}`}
                             fill
                             className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -384,10 +383,10 @@ export default function ProjectDetailClient() {
                         </button>
                         <button
                           onClick={() => handleImageClick(currentIndex2)}
-                          className="relative w-full h-full bg-bg-card overflow-hidden shadow-photo cursor-pointer group"
+                          className="relative w-full aspect-[2/3] bg-bg-card overflow-hidden shadow-photo cursor-pointer group"
                         >
                           <Image
-                            src={urlFor(nextImage).width(700).height(700).fit('crop').auto('format').quality(90).url()}
+                            src={urlFor(nextImage).width(700).height(1050).fit('crop').auto('format').quality(90).url()}
                             alt={nextImage.alt || `${project.title} - Image ${i + 2}`}
                             fill
                             className="object-cover group-hover:scale-105 transition-transform duration-700"
