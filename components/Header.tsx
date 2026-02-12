@@ -118,7 +118,7 @@ export default function Header() {
         visible: { y: 0 },
         hidden: { y: '-100%' },
       }}
-      animate={isHidden ? 'hidden' : 'visible'}
+      animate={isHidden && !isMenuOpen ? 'hidden' : 'visible'}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'glass shadow-soft' : 'bg-transparent'
@@ -210,44 +210,43 @@ export default function Header() {
       </nav>
 
       {/* Mobile Menu Overlay */}
-      <motion.div
-        initial={{ opacity: 0, x: '100%' }}
-        animate={{
-          opacity: isMenuOpen ? 1 : 0,
-          x: isMenuOpen ? 0 : '100%',
-        }}
-        transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-        className="lg:hidden fixed inset-0 top-16 glass"
-      >
-        <nav className="container-custom py-8 h-full flex flex-col justify-center">
-          <ul className="space-y-8">
-            {navigation.map((item, index) => (
-              <motion.li
-                key={item.name}
-                initial={{ opacity: 0, x: 50 }}
-                animate={{
-                  opacity: isMenuOpen ? 1 : 0,
-                  x: isMenuOpen ? 0 : 50,
-                }}
-                transition={{
-                  delay: index * 0.1,
-                  type: 'spring',
-                  stiffness: 300,
-                  damping: 30,
-                }}
-              >
-                <Link
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block text-3xl font-display font-light text-white hover:text-accent transition-colors tap-target py-2"
-                >
-                  {item.name}
-                </Link>
-              </motion.li>
-            ))}
-          </ul>
-        </nav>
-      </motion.div>
+      <AnimatePresence>
+        {isMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring' as const, stiffness: 300, damping: 30 }}
+            className="lg:hidden fixed inset-0 top-16 bg-bg/95 backdrop-blur-md z-40"
+          >
+            <nav className="container-custom py-8 h-full flex flex-col justify-center">
+              <ul className="space-y-8">
+                {navigation.map((item, index) => (
+                  <motion.li
+                    key={item.name}
+                    initial={{ opacity: 0, x: 50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      delay: index * 0.1,
+                      type: 'spring' as const,
+                      stiffness: 300,
+                      damping: 30,
+                    }}
+                  >
+                    <Link
+                      href={item.href}
+                      onClick={() => setIsMenuOpen(false)}
+                      className="block text-3xl font-display font-light text-white hover:text-accent transition-colors tap-target py-2"
+                    >
+                      {item.name}
+                    </Link>
+                  </motion.li>
+                ))}
+              </ul>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.header>
   );
 }
