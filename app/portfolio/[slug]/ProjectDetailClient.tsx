@@ -405,18 +405,16 @@ export default function ProjectDetailClient() {
                     const verticalImg = (
                       <button
                         onClick={() => handleImageClick(currentIndex1)}
-                        className="relative overflow-hidden w-full lg:w-[35%] lg:h-[600px] lg:bg-bg-card lg:shadow-photo cursor-pointer group"
+                        className="relative overflow-hidden w-full lg:w-[35%] lg:h-[600px] bg-bg-card shadow-photo cursor-pointer group"
                       >
-                        <div className="max-w-sm mx-auto lg:max-w-none lg:mx-0 shadow-photo lg:shadow-none">
-                          <Image
-                            src={urlFor(image).width(700).auto('format').quality(90).url()}
-                            alt={image.alt || `${project.title} - Image ${i + 1}`}
-                            width={700}
-                            height={1050}
-                            className="w-full h-auto lg:absolute lg:inset-0 lg:w-full lg:h-full lg:object-cover group-hover:scale-105 transition-transform duration-700"
-                            sizes="(max-width: 1024px) 100vw, 35vw"
-                          />
-                        </div>
+                        <Image
+                          src={urlFor(image).width(700).auto('format').quality(90).url()}
+                          alt={image.alt || `${project.title} - Image ${i + 1}`}
+                          width={700}
+                          height={1050}
+                          className="w-full h-auto lg:absolute lg:inset-0 lg:w-full lg:h-full lg:object-cover group-hover:scale-105 transition-transform duration-700"
+                          sizes="(max-width: 1024px) 100vw, 35vw"
+                        />
                       </button>
                     );
                     const horizontalImg = (
