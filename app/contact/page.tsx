@@ -93,7 +93,7 @@ export default function ContactPage() {
       if (!grecaptcha) throw new Error('reCAPTCHA not loaded');
 
       const recaptchaToken = await grecaptcha.execute(
-        '6Lffm2ksAAAAAPIACUBb0XlPfCBbxs66GrdPNUL3',
+        process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY!,
         { action: 'contact' }
       );
 
