@@ -113,9 +113,15 @@ export default function ProjectDetailClient() {
         setProject(projectData);
 
         // Fetch related projects (same category, excluding current)
+        // Main categories match the portfolio filter tabs
+        const mainCategories = ['Music', 'Portrait', 'Travel'];
         if (projectData) {
+          const isMainCategory = mainCategories.includes(projectData.category);
+          const relatedQuery = isMainCategory
+            ? `*[_type == "portfolioProject" && category == $category && slug.current != $slug] | order(order asc) [0...3]`
+            : `*[_type == "portfolioProject" && !(category in $mainCategories) && slug.current != $slug] | order(order asc) [0...3]`;
           const related = await client.fetch(
-            `*[_type == "portfolioProject" && category == $category && slug.current != $slug] | order(order asc) [0...3] {
+            `${relatedQuery} {
               _id,
               title,
               slug,
@@ -130,7 +136,7 @@ export default function ProjectDetailClient() {
                 alt
               }
             }`,
-            { category: projectData.category, slug }
+            { category: projectData.category, slug, mainCategories }
           );
           setRelatedProjects(related);
         }
