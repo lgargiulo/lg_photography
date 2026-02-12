@@ -1,0 +1,250 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================
+   LG PHOTOGRAPHY - Tailwind CSS v3
+   Dark Moody Editorial Theme
+   ============================================ */
+
+@layer base {
+  :root {
+    /* CSS Variables for non-Tailwind usage */
+    --color-bg: #121212;
+    --color-bg-elevated: #1a1a1a;
+    --color-bg-card: #1f1f1f;
+    --color-bg-hover: #242424;
+    --color-text: #d4d4d4;
+    --color-text-muted: #666666;
+    --color-text-light: #999999;
+    --color-accent: #7c98b3;
+    --color-accent-light: #a0b8ce;
+    --color-accent-dark: #5d7a94;
+    --color-white: #ffffff;
+    --color-border: #2a2a2a;
+    --color-border-light: #353535;
+
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+
+    --section-padding: clamp(80px, 12vw, 140px);
+    --container-width: 1400px;
+    --container-narrow: 900px;
+
+    --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-medium: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  *,
+  *::before,
+  *::after {
+    @apply box-border;
+  }
+
+  html {
+    @apply antialiased;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-bg text-text font-body;
+    font-size: clamp(14px, 2vw, 16px);
+    line-height: 1.6;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display text-white font-light;
+    line-height: 1.2;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 4rem);
+    letter-spacing: -0.02em;
+  }
+
+  h2 {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+  }
+
+  h4 {
+    font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  }
+
+  a {
+    @apply text-inherit no-underline transition-colors duration-200;
+  }
+
+  a:hover {
+    @apply text-accent;
+  }
+
+  img {
+    @apply max-w-full h-auto;
+  }
+
+  button {
+    @apply font-body;
+  }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+@layer utilities {
+  .container-custom {
+    max-width: var(--container-width);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(20px, 5vw, 80px);
+    padding-right: clamp(20px, 5vw, 80px);
+  }
+
+  .container-narrow {
+    max-width: var(--container-narrow);
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: clamp(20px, 5vw, 40px);
+    padding-right: clamp(20px, 5vw, 40px);
+  }
+
+  .section-padding {
+    padding-top: var(--section-padding);
+    padding-bottom: var(--section-padding);
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 rounded-none border transition-all duration-200;
+    font-size: clamp(14px, 1.5vw, 16px);
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    min-height: 48px;
+    min-width: 44px;
+  }
+
+  .btn-primary {
+    @apply btn bg-accent border-accent text-bg;
+  }
+
+  .btn-primary:hover {
+    @apply bg-accent-light border-accent-light;
+  }
+
+  .btn-secondary {
+    @apply btn bg-transparent border-white text-white;
+  }
+
+  .btn-secondary:hover {
+    @apply bg-white text-bg;
+  }
+
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-light) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .tap-target {
+    min-width: 44px;
+    min-height: 44px;
+  }
+
+  .text-responsive {
+    font-size: clamp(14px, 2vw, 16px);
+  }
+
+  .text-responsive-lg {
+    font-size: clamp(16px, 2.5vw, 20px);
+  }
+
+  .fade-in {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+  }
+
+  .slide-up {
+    opacity: 0;
+    transform: translateY(30px);
+    animation: slideUp 0.8s ease-out forwards;
+  }
+
+  /* Glassmorphism Effects */
+  .glass {
+    background: rgba(26, 26, 26, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .glass-light {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  /* Cinematic shadows */
+  .shadow-cinematic {
+    box-shadow: 0 20px 60px -15px rgba(0, 0, 0, 0.8);
+  }
+
+  .shadow-soft {
+    box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+  }
+
+  /* Gradient overlays */
+  .gradient-overlay {
+    background: linear-gradient(180deg, rgba(18,18,18,0) 0%, rgba(18,18,18,0.9) 100%);
+  }
+
+  .gradient-radial {
+    background: radial-gradient(circle at center, rgba(124,152,179,0.15) 0%, transparent 70%);
+  }
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   SCROLLBAR STYLES (Desktop)
+   ============================================ */
+@media (min-width: 1025px) {
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border-light);
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent-dark);
+  }
+}
