@@ -49,7 +49,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.sanity.io; style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data: blob: https: cdn.sanity.io images.unsplash.com; font-src 'self' fonts.gstatic.com; connect-src 'self' api.sanity.io *.sanity.io; frame-src 'self'; frame-ancestors 'self';",
+            value: "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.sanity.io www.google.com www.gstatic.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; img-src 'self' data: blob: https: cdn.sanity.io images.unsplash.com; font-src 'self' fonts.gstatic.com; connect-src 'self' api.sanity.io *.sanity.io www.google.com; frame-src 'self' www.google.com; frame-ancestors 'self';",
           },
           {
             key: 'Permissions-Policy',

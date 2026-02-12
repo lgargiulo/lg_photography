@@ -88,10 +88,19 @@ export default function ContactPage() {
     setSubmitStatus('idle');
 
     try {
+      // Get reCAPTCHA token
+      const grecaptcha = (window as any).grecaptcha;
+      if (!grecaptcha) throw new Error('reCAPTCHA not loaded');
+
+      const recaptchaToken = await grecaptcha.execute(
+        '6Lcxb2ksAAAAACGIcR_cAyYZRIKOUPDjR-HZN2Qt',
+        { action: 'contact' }
+      );
+
       const res = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formState),
+        body: JSON.stringify({ ...formState, recaptchaToken }),
       });
 
       if (!res.ok) throw new Error();
@@ -316,6 +325,14 @@ export default function ContactPage() {
                     Something went wrong. Please try again or email me directly.
                   </motion.div>
                 )}
+
+                <p className="text-xs text-text-light/50 mt-4">
+                  Protected by reCAPTCHA. Google{' '}
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline">Privacy Policy</a>{' '}
+                  and{' '}
+                  <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline">Terms of Service</a>{' '}
+                  apply.
+                </p>
               </form>
             </motion.div>
           </div>

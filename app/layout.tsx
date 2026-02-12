@@ -96,6 +96,8 @@ export default function RootLayout({
         <meta name="ICBM" content="51.8985, -8.4756" />
         <link rel="icon" href="/images/lgLogo.png" type="image/png" />
         <link rel="apple-touch-icon" href="/images/lgLogo.png" />
+        <script src="https://www.google.com/recaptcha/api.js?render=6Lcxb2ksAAAAACGIcR_cAyYZRIKOUPDjR-HZN2Qt" async defer />
+        <style>{`.grecaptcha-badge { visibility: hidden !important; }`}</style>
       </head>
       <body className="min-h-screen flex flex-col">
         <script

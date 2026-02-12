@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
+const RECAPTCHA_SECRET = '6Lcxb2ksAAAAAAmrcN3NthJvu-re_7t8bMoF65A4';
+
 export async function POST(request: Request) {
   try {
     if (!process.env.RESEND_API_KEY) {
@@ -11,7 +13,30 @@ export async function POST(request: Request) {
     }
 
     const resend = new Resend(process.env.RESEND_API_KEY);
-    const { name, email, service, message } = await request.json();
+    const { name, email, service, message, recaptchaToken } = await request.json();
+
+    // Verify reCAPTCHA token
+    if (!recaptchaToken) {
+      return NextResponse.json(
+        { error: 'reCAPTCHA verification failed.' },
+        { status: 400 }
+      );
+    }
+
+    const recaptchaRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${RECAPTCHA_SECRET}&response=${recaptchaToken}`,
+    });
+
+    const recaptchaData = await recaptchaRes.json();
+
+    if (!recaptchaData.success || recaptchaData.score < 0.5) {
+      return NextResponse.json(
+        { error: 'Spam detected. Please try again.' },
+        { status: 400 }
+      );
+    }
 
     // Validate required fields
     if (!name || !email || !message) {
