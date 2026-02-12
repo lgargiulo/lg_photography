@@ -298,21 +298,22 @@ export default function ContactPage() {
                   />
                 </div>
 
-                <p className="text-xs text-text-light/50 text-center -mt-3 -mb-3">
-                  Protected by reCAPTCHA. Google{' '}
-                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline">Privacy Policy</a>{' '}
-                  and{' '}
-                  <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline">Terms of Service</a>{' '}
-                  apply.
-                </p>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="btn-primary w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
-                >
-                  {isSubmitting ? 'Sending...' : 'Send Message'}
-                </button>
+                <div>
+                  <p className="text-xs text-text-light/50 text-center mb-3">
+                    Protected by reCAPTCHA. Google{' '}
+                    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline">Privacy Policy</a>{' '}
+                    and{' '}
+                    <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline">Terms of Service</a>{' '}
+                    apply.
+                  </p>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="btn-primary w-full md:w-auto disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? 'Sending...' : 'Send Message'}
+                  </button>
+                </div>
 
                 {submitStatus === 'success' && (
                   <motion.div
