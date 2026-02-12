@@ -1,8 +1,6 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-const RECAPTCHA_SECRET = '6Lcxb2ksAAAAAAmrcN3NthJvu-re_7t8bMoF65A4';
-
 export async function POST(request: Request) {
   try {
     if (!process.env.RESEND_API_KEY) {
@@ -26,7 +24,7 @@ export async function POST(request: Request) {
     const recaptchaRes = await fetch('https://www.google.com/recaptcha/api/siteverify', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: `secret=${RECAPTCHA_SECRET}&response=${recaptchaToken}`,
+      body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptchaToken}`,
     });
 
     const recaptchaData = await recaptchaRes.json();
