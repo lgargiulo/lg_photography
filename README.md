@@ -161,4 +161,4 @@ npm run lint         # Run ESLint
 
 ## License
 
-ISC License - Copyright (c) 2026 Luca Gargiulo
+ISC License - Copyright 2026 Luca Gargiulo
