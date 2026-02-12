@@ -298,6 +298,14 @@ export default function ContactPage() {
                   />
                 </div>
 
+                <p className="text-xs text-text-light/50 text-center">
+                  Protected by reCAPTCHA. Google{' '}
+                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline">Privacy Policy</a>{' '}
+                  and{' '}
+                  <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline">Terms of Service</a>{' '}
+                  apply.
+                </p>
+
                 <button
                   type="submit"
                   disabled={isSubmitting}
@@ -312,7 +320,7 @@ export default function ContactPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-accent text-sm"
                   >
-                    Got it! I'll get back to you soon.
+                    Message received! I'm excited to hear about your project — expect a reply within 24 hours.
                   </motion.div>
                 )}
 
@@ -325,14 +333,6 @@ export default function ContactPage() {
                     Something went wrong. Please try again or email me directly.
                   </motion.div>
                 )}
-
-                <p className="text-xs text-text-light/50 mt-4">
-                  Protected by reCAPTCHA. Google{' '}
-                  <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline">Privacy Policy</a>{' '}
-                  and{' '}
-                  <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer" className="underline">Terms of Service</a>{' '}
-                  apply.
-                </p>
               </form>
             </motion.div>
           </div>
