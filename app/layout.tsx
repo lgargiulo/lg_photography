@@ -151,7 +151,7 @@ export default function RootLayout({
         <main className="flex-grow">{children}</main>
         <Footer />
         <Script
-          src="https://www.google.com/recaptcha/api.js?render=6Lcxb2ksAAAAACGIcR_cAyYZRIKOUPDjR-HZN2Qt"
+          src="https://www.google.com/recaptcha/api.js?render=6Lffm2ksAAAAAPIACUBb0XlPfCBbxs66GrdPNUL3"
           strategy="lazyOnload"
         />
       </body>
