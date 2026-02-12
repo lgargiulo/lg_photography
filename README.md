@@ -2,7 +2,7 @@
 
 A high-performance, mobile-first photography portfolio built with Next.js 16, Sanity CMS, and Tailwind CSS v4.
 
-## 🚀 Tech Stack
+## Tech Stack
 
 - **Framework:** Next.js 16.1+ (App Router, React Server Components)
 - **Language:** TypeScript
@@ -11,19 +11,18 @@ A high-performance, mobile-first photography portfolio built with Next.js 16, Sa
 - **Image Optimization:** Next/Image with AVIF support
 - **Deployment:** Vercel (recommended)
 
-## 📋 Prerequisites
+## Prerequisites
 
 - Node.js 18+ and npm
 - A Sanity.io account (free tier available)
-- (Optional) Resend account for contact form emails
 
-## 🛠️ Setup Instructions
+## Setup Instructions
 
 ### 1. Install Dependencies
 
-\`\`\`bash
+```bash
 npm install
-\`\`\`
+```
 
 ### 2. Set Up Sanity
 
@@ -34,24 +33,23 @@ npm install
 
 Copy the example environment file:
 
-\`\`\`bash
+```bash
 cp .env.local.example .env.local
-\`\`\`
+```
 
 Edit `.env.local` and add your credentials:
 
-\`\`\`env
+```env
 NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
 NEXT_PUBLIC_SANITY_DATASET=production
-RESEND_API_KEY=your_resend_key (optional for now)
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
-\`\`\`
+```
 
 ### 4. Run Development Server
 
-\`\`\`bash
+```bash
 npm run dev
-\`\`\`
+```
 
 - **Website:** http://localhost:3000
 - **Sanity Studio:** http://localhost:3000/studio
@@ -62,14 +60,22 @@ npm run dev
 2. Sign in with your Sanity account
 3. Start adding content!
 
-## 📁 Project Structure
+## Project Structure
 
-\`\`\`
+```
 lg-photography/
 ├── app/                      # Next.js App Router
 │   ├── globals.css          # Tailwind CSS with design tokens
-│   ├── layout.tsx           # Root layout with metadata
+│   ├── layout.tsx           # Root layout with metadata & JSON-LD
 │   ├── page.tsx             # Homepage
+│   ├── about/               # About page
+│   ├── contact/             # Contact page with form
+│   ├── portfolio/           # Portfolio grid & project detail pages
+│   ├── services/            # Service tiers & FAQs
+│   ├── privacy/             # Privacy policy
+│   ├── terms/               # Terms of service
+│   ├── robots.ts            # Robots.txt generation
+│   ├── sitemap.ts           # Dynamic sitemap generation
 │   └── studio/              # Sanity Studio route
 ├── components/              # React components
 ├── lib/                     # Utilities and helpers
@@ -77,14 +83,13 @@ lg-photography/
 ├── sanity/                  # Sanity configuration
 │   └── schemas/            # Content schemas
 ├── public/                  # Static assets
-├── next.config.ts          # Next.js configuration
+├── middleware.ts            # Rate limiting for API routes
+├── next.config.ts          # Next.js config with security headers
 ├── sanity.config.ts        # Sanity Studio configuration
 └── tailwind.config.ts      # Tailwind configuration
-\`\`\`
+```
 
-## 🎨 Design System
-
-The dark moody theme from the original HTML site has been migrated to Tailwind CSS v4:
+## Design System
 
 ### Colors
 - **Background:** `#050505` (almost black)
@@ -100,41 +105,30 @@ The dark moody theme from the original HTML site has been migrated to Tailwind C
 - **Tablet:** 768-1024px
 - **Desktop:** 1025px+
 
-## 📝 Content Types
+## Content Types (Sanity CMS)
 
-### Services
-Event photography, artist press shots, venue photography, weddings/portraits
+- **Portfolio Projects** — Photography projects with galleries, categories, and rich text descriptions
+- **Service Tiers** — Photography packages (The Capture, The Identity, The Full Story)
+- **FAQs** — Frequently asked questions, assignable to Services page, Contact page, or both
+- **Testimonials** — Client reviews with ratings and avatars
+- **About Page** — Bio, skills, and background info
+- **Site Settings** — Global config: contact info, social media, hero images
 
-### Blog Posts
-Articles with rich text, images, categories, and tags
+## Features
 
-### Gallery Images
-Organized by category with tags and featured status
+- Fully responsive (mobile, tablet, desktop, landscape)
+- Touch-optimized with 44px minimum tap targets
+- Dark moody editorial theme
+- SEO optimized (dynamic sitemap, robots.txt, JSON-LD structured data, per-page metadata)
+- Image optimization (AVIF, WebP, lazy loading, Sanity hotspot/crop)
+- Mobile-specific hero images from Sanity
+- CMS-driven content with hardcoded fallbacks
+- Security headers (CSP, Permissions-Policy, HSTS, X-Frame-Options)
+- Rate limiting on API routes via middleware
+- Portfolio with category filtering and lightbox gallery
+- Contact form with service selection
 
-### Testimonials
-Client reviews with ratings and avatars
-
-### Pages
-Flexible pages for About, Contact, etc.
-
-### Site Settings
-Global settings like contact info, social media, stats
-
-## 🎯 Features
-
-- ✅ Fully responsive (mobile, tablet, desktop, landscape)
-- ✅ Touch-optimized with 44px minimum tap targets
-- ✅ Dark moody editorial theme
-- ✅ SEO optimized with structured data
-- ✅ Image optimization (AVIF, WebP, lazy loading)
-- ✅ Sanity CMS with hotspot/crop support
-- ✅ Security headers (CSP, HSTS, etc.)
-- ✅ 100/100 Lighthouse target
-- ⏳ Contact form with email integration (Resend)
-- ⏳ Blog system with categories
-- ⏳ Dynamic OG image generation
-
-## 🚢 Deployment
+## Deployment
 
 ### Deploy to Vercel (Recommended)
 
@@ -144,7 +138,6 @@ Global settings like contact info, social media, stats
 4. Add environment variables:
    - `NEXT_PUBLIC_SANITY_PROJECT_ID`
    - `NEXT_PUBLIC_SANITY_DATASET`
-   - `RESEND_API_KEY`
    - `NEXT_PUBLIC_SITE_URL`
 5. Deploy!
 
@@ -157,42 +150,15 @@ After deployment, add your Vercel URL to Sanity CORS origins:
 3. Go to API settings
 4. Add your production URL to CORS origins
 
-## 📦 Scripts
+## Scripts
 
-\`\`\`bash
+```bash
 npm run dev          # Start development server with Turbopack
 npm run build        # Build for production
 npm run start        # Start production server
 npm run lint         # Run ESLint
-npm run type-check   # Run TypeScript compiler check
-\`\`\`
+```
 
-## 🔐 Security
-
-Security headers are configured in `next.config.ts`:
-- HSTS (HTTP Strict Transport Security)
-- X-Frame-Options (clickjacking protection)
-- X-Content-Type-Options (MIME sniffing protection)
-- X-XSS-Protection
-- Referrer-Policy
-
-## 📸 Image Optimization
-
-Images are automatically optimized using Next/Image:
-- AVIF format (with WebP/JPEG fallbacks)
-- Responsive srcSet for all device sizes
-- Blur placeholders from Sanity LQIP
-- Lazy loading below the fold
-- Hotspot/crop support via Sanity
-
-## 🤝 Contributing
-
-This is a personal portfolio project for Luca Gargiulo Photography.
-
-## 📄 License
+## License
 
 ISC License - Copyright (c) 2026 Luca Gargiulo
-
----
-
-Built with ❤️ using Next.js 16 and Sanity.io
