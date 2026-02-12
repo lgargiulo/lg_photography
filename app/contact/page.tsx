@@ -298,7 +298,7 @@ export default function ContactPage() {
                   />
                 </div>
 
-                <p className="text-xs text-text-light/50 text-center">
+                <p className="text-xs text-text-light/50 text-center -mt-3 -mb-3">
                   Protected by reCAPTCHA. Google{' '}
                   <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className="underline">Privacy Policy</a>{' '}
                   and{' '}
