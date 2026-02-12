@@ -113,103 +113,105 @@ export default function Header() {
   };
 
   return (
-    <motion.header
-      variants={{
-        visible: { y: 0 },
-        hidden: { y: '-100%' },
-      }}
-      animate={isHidden && !isMenuOpen ? 'hidden' : 'visible'}
-      transition={{ duration: 0.3, ease: 'easeInOut' }}
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'glass shadow-soft' : 'bg-transparent'
-      }`}
-    >
-      <nav className="container-custom">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0 }}
-            className="flex items-center gap-3"
-            onMouseEnter={handleLogoHover}
-          >
-            <Link href="/" className="tap-target relative group">
-              <div className="h-10 md:h-12 w-10 md:w-12 relative">
-                <Image
-                  src="/images/lgLogo.png"
-                  alt="Luca G Photography Logo"
-                  fill
-                  sizes="(max-width: 768px) 40px, 48px"
-                  className="object-contain"
-                  loading="eager"
-                  priority
-                />
-              </div>
-            </Link>
-            <AnimatePresence mode="wait">
-              {showLogoText && (
-                <motion.div className="text-xl md:text-2xl font-display font-light text-white">
-                  <SplitText text="Luca Gargiulo Photography" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.div>
-
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
-            {navigation.map((item, index) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, y: -20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-              >
-                <Link
-                  href={item.href}
-                  className="text-sm font-medium tracking-wider uppercase text-text hover:text-accent transition-colors relative group"
-                >
-                  {item.name}
-                  <motion.span
-                    className="absolute -bottom-1 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300"
+    <>
+      <motion.header
+        variants={{
+          visible: { y: 0 },
+          hidden: { y: '-100%' },
+        }}
+        animate={isHidden && !isMenuOpen ? 'hidden' : 'visible'}
+        transition={{ duration: 0.3, ease: 'easeInOut' }}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled ? 'glass shadow-soft' : 'bg-transparent'
+        }`}
+      >
+        <nav className="container-custom">
+          <div className="flex items-center justify-between h-16 md:h-20">
+            {/* Logo */}
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0 }}
+              className="flex items-center gap-3"
+              onMouseEnter={handleLogoHover}
+            >
+              <Link href="/" className="tap-target relative group">
+                <div className="h-10 md:h-12 w-10 md:w-12 relative">
+                  <Image
+                    src="/images/lgLogo.png"
+                    alt="Luca G Photography Logo"
+                    fill
+                    sizes="(max-width: 768px) 40px, 48px"
+                    className="object-contain"
+                    loading="eager"
+                    priority
                   />
-                </Link>
-              </motion.div>
-            ))}
+                </div>
+              </Link>
+              <AnimatePresence mode="wait">
+                {showLogoText && (
+                  <motion.div className="text-xl md:text-2xl font-display font-light text-white">
+                    <SplitText text="Luca Gargiulo Photography" />
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-8">
+              {navigation.map((item, index) => (
+                <motion.div
+                  key={item.name}
+                  initial={{ opacity: 0, y: -20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link
+                    href={item.href}
+                    className="text-sm font-medium tracking-wider uppercase text-text hover:text-accent transition-colors relative group"
+                  >
+                    {item.name}
+                    <motion.span
+                      className="absolute -bottom-1 left-0 w-0 h-px bg-accent group-hover:w-full transition-all duration-300"
+                    />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="lg:hidden tap-target flex flex-col justify-center items-center gap-1.5 group relative z-50"
+              aria-label="Toggle menu"
+              aria-expanded={isMenuOpen}
+            >
+              <motion.span
+                animate={{
+                  rotate: isMenuOpen ? 45 : 0,
+                  y: isMenuOpen ? 6 : 0,
+                }}
+                className="block h-0.5 w-6 bg-white"
+              />
+              <motion.span
+                animate={{
+                  opacity: isMenuOpen ? 0 : 1,
+                }}
+                className="block h-0.5 w-6 bg-white"
+              />
+              <motion.span
+                animate={{
+                  rotate: isMenuOpen ? -45 : 0,
+                  y: isMenuOpen ? -6 : 0,
+                }}
+                className="block h-0.5 w-6 bg-white"
+              />
+            </button>
           </div>
+        </nav>
+      </motion.header>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="lg:hidden tap-target flex flex-col justify-center items-center gap-1.5 group relative"
-            aria-label="Toggle menu"
-            aria-expanded={isMenuOpen}
-          >
-            <motion.span
-              animate={{
-                rotate: isMenuOpen ? 45 : 0,
-                y: isMenuOpen ? 6 : 0,
-              }}
-              className="block h-0.5 w-6 bg-white"
-            />
-            <motion.span
-              animate={{
-                opacity: isMenuOpen ? 0 : 1,
-              }}
-              className="block h-0.5 w-6 bg-white"
-            />
-            <motion.span
-              animate={{
-                rotate: isMenuOpen ? -45 : 0,
-                y: isMenuOpen ? -6 : 0,
-              }}
-              className="block h-0.5 w-6 bg-white"
-            />
-          </button>
-        </div>
-      </nav>
-
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay - outside header to avoid transform breaking fixed positioning */}
       <AnimatePresence>
         {isMenuOpen && (
           <motion.div
@@ -247,6 +249,6 @@ export default function Header() {
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </>
   );
 }
