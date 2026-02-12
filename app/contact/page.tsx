@@ -85,23 +85,24 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitStatus('idle');
 
-    // Simulate form submission (integrate with your email service later)
-    await new Promise((resolve) => setTimeout(resolve, 2000));
-
-    setIsSubmitting(false);
-    setSubmitStatus('success');
-
-    // Reset form after success
-    setTimeout(() => {
-      setFormState({
-        name: '',
-        email: '',
-        service: '',
-        message: '',
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formState),
       });
-      setSubmitStatus('idle');
-    }, 3000);
+
+      if (!res.ok) throw new Error();
+
+      setSubmitStatus('success');
+      setFormState({ name: '', email: '', service: '', message: '' });
+    } catch {
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleChange = (
@@ -302,7 +303,17 @@ export default function ContactPage() {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-accent text-sm"
                   >
-                    ✓ Got it! I'll get back to you soon.
+                    Got it! I'll get back to you soon.
+                  </motion.div>
+                )}
+
+                {submitStatus === 'error' && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    className="text-red-400 text-sm"
+                  >
+                    Something went wrong. Please try again or email me directly.
                   </motion.div>
                 )}
               </form>
