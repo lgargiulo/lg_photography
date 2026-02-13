@@ -29,6 +29,7 @@ export default function AboutPage() {
   const [valuesRef, valuesInView] = useInView({ triggerOnce: true, threshold: 0.2 });
   const [siteSettings, setSiteSettings] = useState<SiteSettings | null>(null);
   const [aboutPageData, setAboutPageData] = useState<AboutPageData | null>(null);
+  const [loading, setLoading] = useState(true);
   const [liveImageOrientations, setLiveImageOrientations] = useState<{ [key: string]: 'portrait' | 'landscape' }>({});
   const [travelImageOrientations, setTravelImageOrientations] = useState<{ [key: string]: 'portrait' | 'landscape' }>({});
 
@@ -103,8 +104,10 @@ export default function AboutPage() {
           }`
         );
         setAboutPageData(aboutData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
+      } catch {
+        // Silently fail - page works without Sanity data
+      } finally {
+        setLoading(false);
       }
     };
 
@@ -126,6 +129,17 @@ export default function AboutPage() {
       });
     }
   }, [siteSettings]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-bg">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-accent border-t-transparent mb-4"></div>
+          <p className="text-text-light">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen pt-20">
