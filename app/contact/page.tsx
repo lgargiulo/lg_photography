@@ -51,26 +51,28 @@ export default function ContactPage() {
   const [faqRef, faqInView] = useInView({ triggerOnce: true, threshold: 0.2 });
   const [settings, setSettings] = useState<ContactSettings | null>(null);
   const [faqs, setFaqs] = useState<FAQ[]>(fallbackFaqs);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    client.fetch(
-      `*[_type == "siteSettings"][0] {
-        contactEmail,
-        location,
-        socialMedia { instagram }
-      }`
-    ).then(setSettings).catch(() => {});
-
-    client.fetch(
-      `*[_type == "faq" && (page == "contact" || page == "both")] | order(order asc) {
-        question,
-        answer
-      }`
-    ).then((data: FAQ[]) => {
-      if (data && data.length > 0) {
-        setFaqs(data);
-      }
-    }).catch(() => {});
+    Promise.all([
+      client.fetch(
+        `*[_type == "siteSettings"][0] {
+          contactEmail,
+          location,
+          socialMedia { instagram }
+        }`
+      ).then(setSettings).catch(() => {}),
+      client.fetch(
+        `*[_type == "faq" && (page == "contact" || page == "both")] | order(order asc) {
+          question,
+          answer
+        }`
+      ).then((data: FAQ[]) => {
+        if (data && data.length > 0) {
+          setFaqs(data);
+        }
+      }).catch(() => {}),
+    ]).finally(() => setLoading(false));
   }, []);
 
   const [formState, setFormState] = useState({
@@ -122,6 +124,17 @@ export default function ContactPage() {
       [e.target.name]: e.target.value,
     });
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-bg">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-accent border-t-transparent mb-4"></div>
+          <p className="text-text-light">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen pt-20">

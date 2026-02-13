@@ -80,6 +80,7 @@ const fallbackFaqs: FAQ[] = [
 
 export default function ServicesPage() {
   const [faqs, setFaqs] = useState<FAQ[]>(fallbackFaqs);
+  const [loading, setLoading] = useState(true);
   const [heroRef, heroInView] = useInView({ triggerOnce: true, threshold: 0.3 });
   const [processRef, processInView] = useInView({ triggerOnce: true, threshold: 0.2 });
 
@@ -93,8 +94,19 @@ export default function ServicesPage() {
       if (data && data.length > 0) {
         setFaqs(data);
       }
-    }).catch(() => {});
+    }).catch(() => {}).finally(() => setLoading(false));
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-bg">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-16 w-16 border-4 border-accent border-t-transparent mb-4"></div>
+          <p className="text-text-light">Loading...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen pt-20">
