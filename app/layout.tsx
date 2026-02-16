@@ -82,6 +82,7 @@ export const metadata: Metadata = {
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ImageProtection from '@/components/ImageProtection';
 
 export default function RootLayout({
   children,
@@ -147,6 +148,7 @@ export default function RootLayout({
             }),
           }}
         />
+        <ImageProtection />
         <Header />
         <main className="flex-grow">{children}</main>
         <Footer />

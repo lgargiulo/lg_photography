@@ -86,7 +86,7 @@ export default function RecentWork() {
               Recent Work
             </h2>
             <p className="text-lg text-text-light leading-relaxed max-w-2xl">
-              A selection of projects from music festivals to intimate weddings
+              A selection of projects spanning live events and portraiture
             </p>
           </div>
 

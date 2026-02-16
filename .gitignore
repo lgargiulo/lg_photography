@@ -49,4 +49,4 @@ yarn-error.log*
 .sanity
 
 # Local docs (never push)
-GIT_SETUP.md
+docs/GIT_SETUP.md
